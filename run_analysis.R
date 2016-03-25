@@ -106,6 +106,6 @@ newdataset <- melt(newdataset, id=c("subjectID", "activity"), variable.name = "M
 write.table(newdataset, 'tidy_dataset.txt', row.names = FALSE, col.names = TRUE)                              
 
 
-#extra: create a txt file with the names of the variables that were used in the last data set to include it in the codeBook:
+#extra: create a txt file with the names of the variables that were used in the last data set to include in the repository:
 varused = data.frame('variable_names'=names(finalDataFrame))
 write.table(varused, 'variables_used.txt', col.names = TRUE)
