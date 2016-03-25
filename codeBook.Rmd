@@ -85,7 +85,7 @@ This variable refers to the activity performed by each subject in each experimen
 Out of the 561 variables measured in the original experiment, the mean or standard deviation of 86 of them were computed. These 86 variables were selected for the tidy data file. There are two ways one can think of these measurements: 1) each of them being their own variables with each measurement for each subject corresponding to one observation, or 2) these measurements being part of a variable called "measurement", where each of the 86 measurements are different "values" that the variable measurement can take on. 
 
 Here, for the last point of this assignment, I decided to have a single measurement variable that can take on 86 values, given in the table below.
-```{r echo=FALSE}
+```{r echo=FALSE, eval=TRUE}
 print(read.table('variables_used.txt', header = TRUE))
 ```
 
