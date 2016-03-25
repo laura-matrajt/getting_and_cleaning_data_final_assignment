@@ -11,29 +11,9 @@ Full details of the experiments, together with the 561 measured variables can be
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
 
-# Variables used:
-The variables used in this file consist on fixed variables and on measurement variables.
 
-## Fixed Variables:
-There are two fixed variables in this data set:
 
-* SubjectID: this variable refers to the subject identification, it ranges from 1 to 30 since there were 30 participants in this study.
-
-* Activity: This variable refers to the activity performed by each subject in each experiment. There were 6 types of activities: 
-1. Walking
-2. Walking upstairs
-3. Walking downstairs
-4. Sitting
-5. Standing
-6. Laying
-
-## Measurement Variables:
-Out of the 561 variables measured in the original experiment, the mean or standard deviation of 86 of them were computed. For the last point of this assignment, I decided to have a single measurement variable that can take on 86 values, namely, the measurement variable can take on the value of any of the measurements given in the following table:
-```{r echo=FALSE}
-print(read.table('variables_used.txt', header = TRUE))
-```
-
-#Transformations done to the variables:
+#Steps to create the tidy data file:
 Here, I will explain all the steps used in the file run_analysis.R to create the tidy data set of the 5th point of the assignment.
 
 1. I loaded all the data sets contained in the zip folder that are needed for this project. They consist of the following:
@@ -84,6 +64,39 @@ for a more complete discussion on the topic.
 
 I finally created a text file to upload to the coursera site. 
 
+# Variables used in the tidy_dataset.txt file:
+The variables used in this file consist on fixed variables and on measurement variables.
 
+
+
+## SubjectID: 
+This variable refers to the subject identification, it ranges from 1 to 30 since there were 30 participants in this study.
+
+##Activity: 
+This variable refers to the activity performed by each subject in each experiment. There were 6 types of activities: 
+1. Walking
+2. Walking upstairs
+3. Walking downstairs
+4. Sitting
+5. Standing
+6. Laying
+
+## Measurement:
+Out of the 561 variables measured in the original experiment, the mean or standard deviation of 86 of them were computed. These 86 variables were selected for the tidy data file. There are two ways one can think of these measurements: 1) each of them being their own variables with each measurement for each subject corresponding to one observation, or 2) these measurements being part of a variable called "measurement", where each of the 86 measurements are different "values" that the variable measurement can take on. 
+
+Here, for the last point of this assignment, I decided to have a single measurement variable that can take on 86 values, given in the table below.
+```{r echo=FALSE}
+print(read.table('variables_used.txt', header = TRUE))
+```
+
+## mean_value:
+This variable reflects the actual value of the mean of the measurement.
+
+For example, the first line of the tidy_dataset.txt is the observation for the first subject, in the activity "walking", the measurement "tBodyAcc_mean_X" which had a mean value of "0.2789176"
+
+```
+subjectID activity     Measurement  mean_value
+ 1         1  WALKING tBodyAcc_mean_X 0.2789176
+```
 
 

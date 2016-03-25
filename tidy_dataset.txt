@@ -1,4 +1,4 @@
-"subjectID" "activity" "Measurement" "value"
+"subjectID" "activity" "Measurement" "mean_value"
 1 "WALKING" "tBodyAcc_mean_X" 0.278917629056604
 1 "WALKING_UPSTAIRS" "tBodyAcc_mean_X" 0.261237565425532
 1 "WALKING_DOWNSTAIRS" "tBodyAcc_mean_X" 0.22159824394
