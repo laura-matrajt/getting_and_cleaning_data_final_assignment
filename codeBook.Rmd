@@ -1,0 +1,89 @@
+---
+title: "CodeBook"
+author: "laura M"
+date: "March 24, 2016"
+output: html_document
+---
+#Data
+The data presented here is a subset of a dataset from experiments carried out with a group of 30 volonteers wearing a smartphone on the waist. Six types of different activities were recorded for each participant. 561 measurements were taken for each observation using the accelerometer and gyroscope embedded in the device. 
+Here, we considered only those measurements that were means or standard deviations of other measurements of this experiment. 
+Full details of the experiments, together with the 561 measured variables can be found here:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+
+# Variables used:
+The variables used in this file consist on fixed variables and on measurement variables.
+
+## Fixed Variables:
+There are two fixed variables in this data set:
+
+* SubjectID: this variable refers to the subject identification, it ranges from 1 to 30 since there were 30 participants in this study.
+
+* Activity: This variable refers to the activity performed by each subject in each experiment. There were 6 types of activities: 
+1. Walking
+2. Walking upstairs
+3. Walking downstairs
+4. Sitting
+5. Standing
+6. Laying
+
+## Measurement Variables:
+Out of the 561 variables measured in the original experiment, the mean or standard deviation of 86 of them were computed. For the last point of this assignment, I decided to have a single measurement variable that can take on 86 values, namely, the measurement variable can take on the value of any of the measurements given in the following table:
+```{r echo=FALSE}
+print(read.table('variables_used.txt', header = TRUE))
+```
+
+#Transformations done to the variables:
+Here, I will explain all the steps used in the file run_analysis.R to create the tidy data set of the 5th point of the assignment.
+
+1. I loaded all the data sets contained in the zip folder that are needed for this project. They consist of the following:
+
+* Test data sets:
+    + 'X_test.txt'
+    + 'subject_test.txt'
+    + 'y_test.txt'
+ 
+* Training data sets:
+    + 'X_train.txt'
+    + 'subject_train.txt'
+    + 'y_train.txt'
+
+In addition, I loaded the data sets providing the names of the activities ('activity_labels.txt') and the names of the measurements ('features.txt').
+
+2. I renamed the column names of all the data frames to have descriptive variable names:
+
+* The names of the measurements in the 'features.txt' file were assigned as column names of the data frames for the measurementes for the training set and the test set (I called these data frames mydatatrain and mydatatest respectively).
+
+* I changed the column names of the dataframes containing the subject IDs and the activity labels to be "subjectID" and "activity" instead of "V1".
+
+3. I combined the data frames in two steps:
+* I created data frames for the training set (called "traindf") and the test set (called "testdf"). This was not a necessary step, but I thought it made things more clear. In each of these data sets, I joined the actual measurements with the subjects id and the activity labels data frames to create a single data frame with 2+ 561 = 563 columns: subjectID, activity and measurements.
+
+* I combined the two data frames into a single, big data frame, named "mydf".
+
+4. I changed the activity labels to be descriptive as opposed to numerical: i.e before, they were coded as numbers (1-6) and I changed to be coded in strings (see above for specific values).
+
+5. I extracted from this data set the subjectID, activity columns and those columns that referred to measurements of the mean or standard deviation of another measurement.
+To do this, I "cleaned up" the column names of the data frame to make them "syntactically valid names". This meant to remove the "(", ")" , "-" and "," characters. I replaced them with "", "", "_" and "_" respectively. 
+I then used the function "select" to create a new data frame, called "finalDataFrame" with the desired colums.
+
+6. The last step was to create a tidy data set with the average of each variable for each activity and each subject.
+In order to do this, I first used the function "group_by" to group the data frame by subject and activity. I then used the function "summarize" to obtain the mean of each measurement. Finally, I used the function "melt" so that I have one type of measurement per line as opposed to multiple columns with different measurements. 
+
+Please note that by doing this, I obtained a *tidy* data frame by utilizing these series of commands:
+as indicated in Hadley Wickham's paper (2014), a tidy data frame is such that satisfies three things
+
+* Each variable forms a column: here my variables are: subjectID, activity, Measurement, and value. That is, the column "measurement" becomes now its own variable, and this variable can take on 86 values, namely, each of the measurements containing a mean or a standard deviation.
+
+* Each observation forms a row: indeed, each row corresponds to one particular observation of the experiment.
+
+* Each type of observational unit forms a table: not applicable in this case.
+
+One could argue that we didn't need to melt the previous data frame to obtain a *tidy* data frame, since one could think of each measurement as a stand-alone variable. I agree with this, but I decided here to give the most complete anwswer posible. Please refer to https://thoughtfulbloke.wordpress.com/2015/09/09/getting-and-cleaning-the-assignment/
+for a more complete discussion on the topic.
+
+I finally created a text file to upload to the coursera site. 
+
+
+
+

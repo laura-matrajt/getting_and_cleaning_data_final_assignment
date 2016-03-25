@@ -1,0 +1,19 @@
+---
+title: "README"
+author: "Laura"
+date: "March 23, 2016"
+output: html_document
+---
+
+This repository contains the files necessary to submit the final assignment of the Coursera course "Getting and cleaning Data".
+
+
+## run_analysis.R script
+This file contains the r script that will load the data sets, clean them and create the new tidy data set that this final assignment requires.
+
+## codeBook.Rmd
+This file contains a description of the data, the variables used, and the transformations done to them to obtain a 
+"tidy data set with the average of each variable for each activity and each subject."
+
+## variables_used.txt
+This file contains the names of the variables used in the tidy data frame, that is, only the measurements with a mean or standard deviation were. This file is here so that the codeBook.Rmd can read the file and generate the table of variables.
